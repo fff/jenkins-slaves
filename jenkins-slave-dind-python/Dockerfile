@@ -14,8 +14,7 @@ ENV PYTHON_VERSION 3.6.6
 ENV PYTHON_PIP_VERSION 10.0.1
 #
 RUN set -ex \
-	&& curl -fSL "http://192.168.200.124:9999/Python-${PYTHON_VERSION}.tar.xz" -o python.tar.xz \
-	# && curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz \
+	&& curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz \
 	&& curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc \
 	&& curl -fSL "https://www.python.org/static/files/pubkeys.txt" -o pubkeys.txt \
 	&& gpg --import pubkeys.txt \
