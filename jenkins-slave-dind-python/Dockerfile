@@ -27,9 +27,10 @@ RUN set -ex \
 	&& ./configure --enable-shared --enable-unicode=ucs4 \
 	&& make -j$(nproc) \
 	&& make install \
-	&& ldconfig \
-	&& curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python3 \
-	&& pip install --no-cache-dir --upgrade pip==$PYTHON_PIP_VERSION \
+	&& ldconfig
+RUN set -ex \
+	# && curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python3 \
+	# && pip install --no-cache-dir --upgrade pip==$PYTHON_PIP_VERSION \
 	&& find /usr/local -depth \
 		\( \
 		    \( -type d -a -name test -o -name tests \) \
@@ -40,7 +41,7 @@ RUN set -ex \
 
 # install "virtualenv", since the vast majority of users of this image will want it
 COPY pip.conf /root/.pip/pip.conf
-RUN pip install --no-cache-dir virtualenv selenium chromedriver
+RUN python3 -m pip install --no-cache-dir virtualenv selenium chromedriver
 
 RUN set -ex \
 	&& echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list \
