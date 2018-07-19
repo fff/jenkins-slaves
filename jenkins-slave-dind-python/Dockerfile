@@ -61,4 +61,8 @@ RUN set -ex \
 	&& ln -s /opt/chromedriver/chromedriver /usr/bin/ \
 	&& rm -f chromedriver.zip
 
+RUN set -ex \
+	&& locale-gen zh_CN.UTF-8 \
+	&& update-locale LANG=zh_CN.UTF-8
+
 CMD ["/usr/sbin/sshd", "-D"]
